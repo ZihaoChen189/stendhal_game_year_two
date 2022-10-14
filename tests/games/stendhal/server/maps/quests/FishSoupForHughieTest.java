@@ -106,7 +106,7 @@ public class FishSoupForHughieTest {
 		en.step(player, "task");
 		assertEquals("My poor boy is sick and the potions I give him aren't working! Please could you fetch him some fish soup?", getReply(npc));
 		en.step(player, "yes");
-		assertEquals("Thank you! You can ask Florence Bouillabaisse to make you fish soup. I think she's in Ados market somewhere.", getReply(npc));
+		assertEquals("Thank you! You can ask Florence Boullabaisse to make you fish soup. I think she's in Ados market somewhere.", getReply(npc));
 		en.step(player, "bye");
 		assertEquals("Goodbye.", getReply(npc));
 
