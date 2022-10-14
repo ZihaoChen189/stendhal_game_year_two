@@ -49,16 +49,6 @@ public class TeleportToActionTest {
 		final TeleportToAction action = new TeleportToAction();
 		String[] param = {};
 		assertTrue(action.execute(param, "reason"));
-		teleporttoFlorence();
-	}
-	
-	/**
-	 * Tests for teleport to Florence Boullabaisse
-	 */
-	public void teleporttoFlorence() {	
-		final TeleportToAction action = new TeleportToAction();
-		String[] params1 = {"Florence Bouillabaisse"};
-		assertTrue(action.execute(params1, "reason"));
 	}
 	
 	/**
