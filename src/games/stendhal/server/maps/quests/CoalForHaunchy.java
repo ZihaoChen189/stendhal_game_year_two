@@ -220,7 +220,7 @@ public class CoalForHaunchy extends AbstractQuest {
 
 		npc.add(
 				ConversationStates.ATTENDING,
-				Arrays.asList("coal","stone coal"),
+				Arrays.asList("coal","stone coal", "charcoal"),
 				new QuestNotInStateCondition(QUEST_SLOT,"start"),
 				ConversationStates.ATTENDING,
 				"Sometime you could do me a #favour ...", null);
