@@ -33,6 +33,7 @@ import games.stendhal.server.entity.npc.action.SayTimeRemainingAction;
 import games.stendhal.server.entity.npc.action.SetQuestAndModifyKarmaAction;
 import games.stendhal.server.entity.npc.condition.AndCondition;
 import games.stendhal.server.entity.npc.condition.NotCondition;
+import games.stendhal.server.entity.npc.condition.OrCondition;
 import games.stendhal.server.entity.npc.condition.PlayerHasItemWithHimCondition;
 import games.stendhal.server.entity.npc.condition.QuestCompletedCondition;
 import games.stendhal.server.entity.npc.condition.QuestInStateCondition;
@@ -150,7 +151,10 @@ public class CoalForHaunchy extends AbstractQuest {
 		triggers.add("charcoal");
 		triggers.add("stone coal");
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);
-
+		
+//		for (String item : triggers) {
+			
+		
 		// player asks about quest or says coal when they are supposed to bring some coal and they have it
 		npc.add(
 				ConversationStates.ATTENDING, triggers,
@@ -174,6 +178,7 @@ public class CoalForHaunchy extends AbstractQuest {
 										+ System.currentTimeMillis(), 10.0).fire(player, sentence, npc);
 							}
 						}));
+
 		
 		npc.add(
 				ConversationStates.ATTENDING, triggers,
@@ -201,17 +206,17 @@ public class CoalForHaunchy extends AbstractQuest {
 		// player asks about quest or says coal when they are supposed to bring some coal and they don't have it
 		npc.add(
 				ConversationStates.ATTENDING, triggers,
-				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("coal",25))),
+				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new OrCondition(new PlayerHasItemWithHimCondition("coal",25),new PlayerHasItemWithHimCondition("charcoal",25)))),
 				ConversationStates.ATTENDING,
 				"You don't have the coal amount which I need yet. Go and pick some more pieces up, please.",
 				null);
 		
-		npc.add(
-				ConversationStates.ATTENDING, triggers,
-				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("charcoal",25))),
-				ConversationStates.ATTENDING,
-				"You don't have the coal amount which I need yet. Go and pick some more pieces up, please.",
-				null);
+//		npc.add(
+//				ConversationStates.ATTENDING, triggers,
+//				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("charcoal",25))),
+//				ConversationStates.ATTENDING,
+//				"You don't have the coal amount which I need yet. Go and pick some more pieces up, please.",
+//				null);
 
 		npc.add(
 				ConversationStates.ATTENDING,
@@ -219,7 +224,9 @@ public class CoalForHaunchy extends AbstractQuest {
 				new QuestNotInStateCondition(QUEST_SLOT,"start"),
 				ConversationStates.ATTENDING,
 				"Sometime you could do me a #favour ...", null);
+		
 	}
+		
 
 	@Override
 	public void addToWorld() {
