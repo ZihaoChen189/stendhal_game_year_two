@@ -206,6 +206,28 @@ ask for horse hair.
 				new EquipItemAction("horse hair"));
 
 	}
+	
+	
+	/*
+	 * A new feature about conversation of the NPC Karl was created, following the style of previous function.
+	 * The player could get the item "horse hair" after saying "horse hair" or "Ouchit" through adding a new conversation state 
+	 * and the specific NPC reply was also considered. (However, the trigger will only be fired one time by the key word during the quest.)
+	 */
+	public void getHairStep2() {
+		// get a reference to the Karl NPC
+		SpeakerNPC npc = npcs.get("Karl");
+
+		// The key word trigger "horse hair" was added here so that NPC Karl can react when catching it.
+		npc.add(ConversationStates.ATTENDING,
+				"horse hair",
+				new AndCondition(new QuestInStateCondition(QUEST_SLOT,"hair"),
+								new NotCondition (new PlayerHasItemWithHimCondition("horse hair",1))),
+				ConversationStates.ATTENDING,
+				"Hello, hello! Ouchit needs more horse hairs from my horses? " +
+				"No problem, here you are. Send Ouchit greetings from me.",
+				new EquipItemAction("horse hair"));  // The correct reply and item could be added when the player said the key word.
+
+	}
 
 	public void bringHairStep() {
 
@@ -275,6 +297,7 @@ and ask for horse hair.
 		prepareQuestStep();
 		bringWoodStep();
 		getHairStep();
+		getHairStep2();  // the new designed function
 		bringHairStep();
 		fillQuestInfo(
 				"Bows for Ouchit",
