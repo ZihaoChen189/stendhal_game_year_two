@@ -67,7 +67,7 @@ public class MakeupArtistNPCTest extends ZonePlayerAndNPCTestImpl {
 		assertTrue(fidoreaNpc.isTalking());
 		String listOfMasksReply = getReply(fidoreaNpc);
 		assertTrue(listOfMasksReply.startsWith(YOU_CAN_REPLY));
-		assertTrue(listOfMasksReply.contains("brown fox"));
+		assertTrue(listOfMasksReply.contains("fox"));
 		assertTrue(listOfMasksReply.contains("white fox"));
 		assertTrue(listOfMasksReply.contains("monkey"));
 		assertTrue(listOfMasksReply.contains("penguin"));
