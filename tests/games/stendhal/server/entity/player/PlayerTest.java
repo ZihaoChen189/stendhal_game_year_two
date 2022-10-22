@@ -17,8 +17,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.number.IsCloseTo.closeTo;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -34,6 +36,7 @@ import games.stendhal.common.constants.Nature;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.Entity;
 import games.stendhal.server.entity.Outfit;
+import games.stendhal.server.entity.creature.Sheep;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.status.StatusType;
 import games.stendhal.server.maps.MockStendhalRPRuleProcessor;
@@ -41,6 +44,7 @@ import games.stendhal.server.maps.MockStendlRPWorld;
 import marauroa.common.game.RPObject;
 import marauroa.server.game.db.DatabaseFactory;
 import utilities.PlayerTestHelper;
+import utilities.RPClass.SheepTestHelper;
 
 public class PlayerTest {
 	private String playername = "player";
@@ -52,6 +56,7 @@ public class PlayerTest {
 	public static void setUpBeforeClass() throws Exception {
 		new DatabaseFactory().initializeDatabase();
 		MockStendlRPWorld.get();
+		SheepTestHelper.generateRPClasses();
 	}
 
 	@After
@@ -517,4 +522,28 @@ public class PlayerTest {
 		int magicSkillXpLater = player.getMagicSkillXp(Nature.LIGHT);
 		assertThat(magicSkillXpLater, is(0));
 	}
+	
+	
+	@Test
+	public void testNotAllowedZoneChange() {
+		
+		final StendhalRPZone zone = new StendhalRPZone("testzone", 80, 80);
+		MockStendlRPWorld.get().addRPZone(zone);
+		
+		final Player gy = PlayerTestHelper.createPlayer("gy");
+		zone.add(gy);
+		
+		final Sheep sheep = new Sheep(gy);
+		zone.add(sheep);
+	
+		
+		gy.setPosition(0, 0);
+		sheep.setPosition(60, 60);
+
+		assertSame(sheep, gy.getSheep());
+		
+		assertFalse(gy.isZoneChangeAllowed());
+		assertEquals("Your pet is trying to catch up with you~" + "\n" + "Please wait for your pet to approach you before entering.", gy.notification());
+	}
+	
 }

@@ -1662,6 +1662,11 @@ public class Player extends DressedEntity implements UseListener {
 		remove("outfit_expire_age");
 	}
 
+	public String notification() {
+		String text = ("Your pet is trying to catch up with you~" + "\n" + "Please wait for your pet to approach you before entering.");	
+		return (text);
+	}
+	
 	//
 	// ActiveEntity
 	//
@@ -1681,7 +1686,7 @@ public class Player extends DressedEntity implements UseListener {
 
 		if (sheep != null) {
 			if (squaredDistance(sheep) > 7 * 7) {
-				sendPrivateText("Your pet is trying to catch up with you~" + "\n" + "Please wait for your pet to approach you before entering.");
+				sendPrivateText(notification());
 				return false;
 			}
 		}
@@ -1690,7 +1695,7 @@ public class Player extends DressedEntity implements UseListener {
 
 		if (pet != null) {
 			if (squaredDistance(pet) > 7 * 7) {
-				sendPrivateText("Your pet is trying to catch up with you~" + "\n" + "Please wait for your pet to approach you before entering.");
+				sendPrivateText(notification());
 				return false;
 			}
 		}
