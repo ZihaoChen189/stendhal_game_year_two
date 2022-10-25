@@ -84,6 +84,8 @@ public class FishSoup extends AbstractQuest {
 	 *            If true, sets a # character in front of every name
 	 * @return A list of food item names
 	 */
+	
+	// basically prints the food that have been given yet
 	private List<String> missingFood(final Player player, final boolean hash) {
 		final List<String> result = new LinkedList<String>();
 
