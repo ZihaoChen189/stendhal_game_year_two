@@ -41,6 +41,33 @@ public class DropAction extends EquipmentAction {
 
 		final Entity entity = source.getEntity();
 		final String itemName = source.getEntityName();
+		
+//		prevents candles being dropped in the zekiels practical test quest to prevent cheating
+		
+		if ("int_semos_wizards_tower_1".equals(player.getZone().getName()) && itemName.equals("candle")) {
+			player.sendPrivateText("You cannot drop candles in this quest");
+			return;
+		}
+		if ("int_semos_wizards_tower_2".equals(player.getZone().getName()) && itemName.equals("candle")) {
+			player.sendPrivateText("You cannot drop candles in this quest");
+			return;
+		}
+		if ("int_semos_wizards_tower_3".equals(player.getZone().getName()) && itemName.equals("candle")) {
+			player.sendPrivateText("You cannot drop candles in this quest");
+			return;
+		}
+		if ("int_semos_wizards_tower_4".equals(player.getZone().getName()) && itemName.equals("candle")) {
+			player.sendPrivateText("You cannot drop candles in this quest");
+			return;
+		}
+		if ("int_semos_wizards_tower_5".equals(player.getZone().getName()) && itemName.equals("candle")) {
+			player.sendPrivateText("You cannot drop candles in this quest");
+			return;
+		}
+		if ("int_semos_wizards_tower_6".equals(player.getZone().getName()) && itemName.equals("candle")) {
+			player.sendPrivateText("You cannot drop candles in this quest");
+			return;
+		}
 
 		if (source.moveTo(dest, player)) {
 			if (entity instanceof Item) {
