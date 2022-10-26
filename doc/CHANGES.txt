@@ -2,6 +2,19 @@ Changelog
 ---------
 ---------
 
+1.40uom
+
+
+*world*
+- removed random aspect of getting a mask from Fidorea and allowed the player to choose which mask they want
+- added a function with the new "horse hair" trigger so that Karl could react when player said key words
+- fix the typo in chat with npc Anastasia so that the player can teleport successfully with the correct npc name 'Boullabaisse'
+- implemented give everything feature to coralina
+- fixed the issues that player with the highest attack weapon “the rod of the gm”
+- added a notification when it is not allowed to travel between zones caused by sheep or pet is too slow
+- fixed Haunchy doesn't accept charcoal
+- fixed cheating on Zekiel's Practical Test
+
 
 1.40
 
