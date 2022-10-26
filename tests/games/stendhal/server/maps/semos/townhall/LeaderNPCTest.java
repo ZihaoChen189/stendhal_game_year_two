@@ -193,6 +193,7 @@ public class LeaderNPCTest {
 		player.drop(weapon8);
 		
 		//test for Lieutenant Drilenun suggests that a better weapon exists
+		// add some code here for commit
 		final Item weapon9 = new Item("rod of the gm", "club", "subclass", null);
 		weapon9.setEquipableSlots(Arrays.asList("lhand"));
 		weapon9.put("atk", 100);
