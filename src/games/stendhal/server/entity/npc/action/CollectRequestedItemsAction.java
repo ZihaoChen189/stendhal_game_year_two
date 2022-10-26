@@ -53,6 +53,9 @@ public final class CollectRequestedItemsAction implements ChatAction {
 	 * @param completionAction action to execute after the complete list was brought
 	 * @param stateAfterCompletion state to change to after completion
 	 */
+	
+	
+	
 	public CollectRequestedItemsAction(String itemName, String quest, String questionForMore, String alreadyBrought, ChatAction completionAction, ConversationStates stateAfterCompletion) {
 		this.itemName = checkNotNull(itemName);
 		this.questSlot = checkNotNull(quest);
@@ -93,7 +96,7 @@ public final class CollectRequestedItemsAction implements ChatAction {
 	 * @param itemCount count
 	 * @return true if something was dropped
 	 */
-	boolean dropItems(final Player player, int itemCount) {
+	 boolean dropItems(final Player player, int itemCount) {
 		boolean result = false;
 
 		// parse the quest state into a list of still missing items
@@ -146,7 +149,7 @@ public final class CollectRequestedItemsAction implements ChatAction {
 	 * @param player The player doing the quest
 	 * @return A list of item names
 	 */
-	ItemCollection getMissingItems(final Player player) {
+	public ItemCollection getMissingItems(final Player player) {
 		final ItemCollection missingItems = new ItemCollection();
 
 		missingItems.addFromQuestStateString(player.getQuest(questSlot));

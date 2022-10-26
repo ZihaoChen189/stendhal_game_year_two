@@ -1,8 +1,6 @@
 package games.stendhal.server.maps.quests;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +32,6 @@ import games.stendhal.server.entity.npc.condition.QuestNotStartedCondition;
 import games.stendhal.server.entity.npc.condition.QuestStateStartsWithCondition;
 import games.stendhal.server.entity.npc.condition.TimePassedCondition;
 import games.stendhal.server.entity.player.Player;
-import games.stendhal.server.entity.status.PoisonStatus;
 import games.stendhal.server.maps.Region;
 import games.stendhal.server.util.ItemCollection;
 
@@ -127,8 +124,6 @@ public class FruitsForCoralia extends AbstractQuest {
  		return Region.ADOS_CITY;
  	}
 
- 	
- 	// checks for quest being active or not 
  	@Override
 	public List<String> getHistory(final Player player) {
 		final List<String> res = new ArrayList<String>();
@@ -293,48 +288,8 @@ public class FruitsForCoralia extends AbstractQuest {
             "I've never seen pomegranate trees growing wild, but I heard of a man living south of the great river cultivating them in his garden.",
             null);
     }
-    
-    
-    
-    
-   
-    
 
 
-
-    
-    
-  	public void giveEverything(final Player player, final EventRaiser npc1) {
-
-		
-
-  		final String questState = player.getQuest(QUEST_SLOT);
-  		final ItemCollection neededItems = new ItemCollection();
-  		neededItems.addFromQuestStateString(questState);
-
-  		npc1.say("Transaction 1");
-  		npc1.say("neededItems.entrySet() "+neededItems.entrySet());
-  		npc1.say("Transaction 2");
-  		
-  		
-  		for (Map.Entry<String, Integer> item : neededItems.entrySet()) {
-  	  		for (Integer i = 0; i < item.getValue(); i++) {
-  	  		 new CollectRequestedItemsAction(item.getKey(),
-    				QUEST_SLOT,
-    				"WOW EVERYTHING???",
-    				"I already have enough of those.",
-    				null,
-    				ConversationStates.ATTENDING);
-  	  		}
-  		}  		
-	
-  	}
-		
-	
-    
-    
-    
-    
     private void prepareBringingStep() {
 		final SpeakerNPC npc = npcs.get("Coralia");
 
@@ -344,7 +299,7 @@ public class FruitsForCoralia extends AbstractQuest {
     		new QuestActiveCondition(QUEST_SLOT),
     		ConversationStates.QUESTION_2,
     		null,
-    		new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "I'd still like [items] or #everything or #everything1. Have you brought any?"));
+    		new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "I'd still like [items]. Have you brought any or #everything?"));
 
     	// player says he didn't bring any items
 		npc.add(ConversationStates.QUESTION_2,
@@ -361,20 +316,6 @@ public class FruitsForCoralia extends AbstractQuest {
 			ConversationStates.QUESTION_2,
 			"Wonderful, what fresh delights have you brought?",
 			null);
-		
-		npc.add(ConversationStates.QUESTION_2,
-				"everything",
-				new QuestActiveCondition(QUEST_SLOT),
-				ConversationStates.QUESTION_2,
-				null,
-				null);
-//				new ChatAction() {
-//				@Override
-//					public void fire(final Player player, final Sentence sentence,
-//							   final EventRaiser npc) {
-//					giveEverything(player, npc);
-//					}});
-			
 
 		// set up next step
     	ChatAction completeAction = new  MultipleActions(
@@ -387,9 +328,6 @@ public class FruitsForCoralia extends AbstractQuest {
 			new SetQuestToTimeStampAction(QUEST_SLOT, 1)
 		);
 
-    	
-  
-    	
     	// add triggers for the item names
     	final ItemCollection items = new ItemCollection();
     	items.addFromQuestStateString(NEEDED_ITEMS);
@@ -401,32 +339,78 @@ public class FruitsForCoralia extends AbstractQuest {
     			null,
     			new CollectRequestedItemsAction(item.getKey(),
     				QUEST_SLOT,
-    				"Wonderful! Did you bring anything else with you?",
-    				"I already have enough of those.",
+    				"Wonderful! Did you bring anything else with you?", "I already have enough of those.",
     				completeAction,
     				ConversationStates.ATTENDING));
     	}
-    	
-    	for (final Map.Entry<String, Integer> item : items.entrySet()) {
-//    		for(Integer i = 0; i < item.getValue(); i++) {
-    		npc.add(ConversationStates.QUESTION_2,
-    			"everything",
-    			new QuestActiveCondition(QUEST_SLOT),
-    			ConversationStates.QUESTION_2,
-    			"HELLO?",
-    			new CollectRequestedItemsAction(item.getKey(),
-    				QUEST_SLOT,
-    				null,    				
-    				"I already have enough of those.",
-    				completeAction,
-    				ConversationStates.ATTENDING));
-//    	}
-	}
-    	
-    	
-    	
-    	
+    	// Perhaps player wants to give all the ingredients at once
+		npc.add(ConversationStates.QUESTION_2,
+	    			"everything",
+	    			new QuestActiveCondition(QUEST_SLOT),
+	    			ConversationStates.QUESTION_2,
+	    			null,
+				new ChatAction() {
+			    @Override
+				public void fire(final Player player, final Sentence sentence,
+					   final EventRaiser npc) {
+			    	giveEverything(player, npc);
+			}
+		});
     }
+		/*
+		 *  gives everything that the player has in his bag,
+		 *  if an item is missing it will print: "itemName=AmountMissing"
+		 *  If the player has everything in his bag rewards will automatically apply
+		 */
+		private void giveEverything(final Player player, final EventRaiser npc) {
+			// requested fruits for the quest
+			String questFruits = player.getQuest(QUEST_SLOT);
+			final ItemCollection fruitNames = new ItemCollection();
+			// 
+			fruitNames.addFromQuestStateString(questFruits);
+			// stores updated numbers of fruits. 
+			String updatedNumberOfFruits ="";
+						
+			
+		
+			for(Map.Entry<String, Integer> item : fruitNames.entrySet()) {
+				/*
+				 * If item in the bag drops the item
+				 * Updates required number fruits 
+				 */
+				int requiredFruitNumber = item.getValue();
+				for (int i=0; i<item.getValue(); i++) {
+					if(player.drop(item.getKey())) {
+						requiredFruitNumber -=1;
+					}
+				}
+			
+				if(requiredFruitNumber!=0) {
+					updatedNumberOfFruits = item.getKey()+"="+requiredFruitNumber+";";
+				}
+			}
+			// rewards
+			if(updatedNumberOfFruits == "") {
+				ChatAction completeAction = new  MultipleActions(
+						new SetQuestAction(QUEST_SLOT, "done"),
+						new SayTextAction("My hat has never looked so delightful! Thank you ever so much! Here, take this as a reward."),
+						new IncreaseXPAction(300),
+						new IncreaseKarmaAction(5),
+						new EquipRandomAmountOfItemAction("crepes suzette", 1, 5),
+						new EquipRandomAmountOfItemAction("minor potion", 2, 8),
+						new SetQuestToTimeStampAction(QUEST_SLOT, 1));
+				
+				completeAction.fire(player, null, npc);
+			// displays what else to bring:
+			} else {
+				npc.say("You still need to give me: "+ "#"+updatedNumberOfFruits);
+				player.setQuest(QUEST_SLOT, updatedNumberOfFruits);
+			}
+		}
+    	
+    	
+    	
+    	
 
 	@Override
 	public String getNPCName() {
