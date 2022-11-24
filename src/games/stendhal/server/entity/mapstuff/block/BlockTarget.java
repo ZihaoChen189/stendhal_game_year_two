@@ -146,4 +146,30 @@ public class BlockTarget extends AreaEntity implements PuzzleEntity {
 		this.puzzleBuildingBlock = buildingBlock;
 	}
 
+	public boolean doesTrigger(Handcart b, Player p) {
+		String blockShape = b.getShape();
+		String targetShape = this.getShape();
+		boolean shapeFits = true;
+		boolean conditionMet = true;
+
+		if(targetShape != null) {
+			shapeFits = targetShape.equals(blockShape);
+		}
+
+		if(this.condition != null) {
+			conditionMet = this.condition.fire(p, null, null);
+		}
+
+		return conditionMet && shapeFits;
+	}
+
+	public void trigger(Handcart b, Player p) {
+		if(this.action != null) {
+			this.action.fire(p, null, null);
+		}
+		if (puzzleBuildingBlock != null) {
+			puzzleBuildingBlock.put("active", true);
+		}
+	}
+
 }
