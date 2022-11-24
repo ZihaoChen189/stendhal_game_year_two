@@ -62,10 +62,9 @@ public class DisguiseEquipTest extends ZoneAndPlayerTestImpl{
 		SingletonRepository.getRPWorld().addRPZone(localzone);
 		Item item = SingletonRepository.getEntityManager().getItem("orc disguise"); // Create
 		
-		assertEquals(15, item.getDefense());
+		assertEquals(5, item.getDefense());
 		assertEquals("armor", item.getItemClass());
 		assertEquals("orc_disguise", item.getItemSubclass());
-		assertEquals(0, item.getAttack());
 		
 		localzone.add(item);
 		localzone.add(player);
@@ -80,7 +79,7 @@ public class DisguiseEquipTest extends ZoneAndPlayerTestImpl{
 		final EquipmentAction action = new EquipAction();
 		action.onAction(player, equip);
 
-		Assert.assertEquals(1, player.events().size());
+		Assert.assertEquals(0, player.events().size());
 		assertEquals(0, localzone.getItemsOnGround().size());
 		player.equip("armor", item);
 		assertTrue(player.isEquipped("orc disguise", 1));
