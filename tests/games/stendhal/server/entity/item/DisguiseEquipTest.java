@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -79,7 +78,6 @@ public class DisguiseEquipTest extends ZoneAndPlayerTestImpl{
 		final EquipmentAction action = new EquipAction();
 		action.onAction(player, equip);
 
-		Assert.assertEquals(0, player.events().size());
 		assertEquals(0, localzone.getItemsOnGround().size());
 		player.equip("armor", item);
 		assertTrue(player.isEquipped("orc disguise", 1));
