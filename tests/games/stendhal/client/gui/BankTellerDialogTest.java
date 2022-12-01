@@ -40,7 +40,7 @@ public class BankTellerDialogTest {
 	public void testConversation() {
 		en.step(player, "hi");
 		en.step(player, "bankstatement");
-		assertEquals("Bankstatement is a new feature. After you adding things to your bank chest, you can check your bankstatement in the travel log panel '.", getReply(npc));
+		assertEquals("Bankstatement is a new feature. After you adding things to your bank chest, you can check your bankstatement in the travel log panel. There is also #update function.", getReply(npc));
 		en.step(player, "update");
 		assertEquals("You can click the 'update' bottom in the travel log panel to update your bankstatement. You are on free trial by now, so the service is totally free.", getReply(npc));
 	}
