@@ -63,10 +63,11 @@ public class ProgressStatusQueryAction implements ActionListener {
 	 *
 	 * @param player Player to sent the event to
 	 */
-	private void sendProgressTypes(Player player) {
+	public List<String> sendProgressTypes(Player player) {
 		List<String> list = Arrays.asList("Open Quests", "Completed Quests", "Production");
 		player.addEvent(new ProgressStatusEvent(list));
 		player.notifyWorldAboutChanges();
+		return list;
 	}
 
 	/**
