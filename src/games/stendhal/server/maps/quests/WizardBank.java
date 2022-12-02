@@ -330,7 +330,13 @@ public class WizardBank extends AbstractQuest implements LoginListener,LogoutLis
 				addReply("fiscal",
 						"You do not understand the meaning of the word? You should spend more time in libraries, I hear the one in Ados is excellent. Anyhow, to #enter the bank just ask.");
 
-				addHelp("This bank is suffused with #magic, and as such you may access any vault you own. There will be a #fee to pay for this privilege, as we are not a charity.");
+				addHelp("This bank is suffused with #magic, and as such you may access any vault you own. There will be a #fee to pay for this privilege, as we are not a charity. We also have #bankstatement feature.");
+				
+				addReply("bankstatement",
+						"Bankstatement is a new feature. After you adding things to your bank chest, you can check your bankstatement in the travel log panel. There is also #update function.");
+				
+				addReply("update",
+						"You can click the 'update' bottom in the travel log panel to update your bankstatement. You are on free trial by now, so the service is totally free.");
 
 				addQuest("To #enter this bank you need only ask.");
 

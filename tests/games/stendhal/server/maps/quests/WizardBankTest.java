@@ -171,7 +171,7 @@ public class WizardBankTest extends ZonePlayerAndNPCTestImpl {
 		assertTrue(npc.isTalking());
 
 		assertTrue(en.step(player, "help me"));
-		assertEquals("This bank is suffused with #magic, and as such you may access any vault you own. There will be a #fee to pay for this privilege, as we are not a charity.", getReply(npc));
+		assertEquals("This bank is suffused with #magic, and as such you may access any vault you own. There will be a #fee to pay for this privilege, as we are not a charity. We also have #bankstatement feature.", getReply(npc));
 		assertTrue(npc.isTalking());
 
 		assertTrue(en.step(player, "magic"));

@@ -62,7 +62,9 @@ public class TellerNPC implements ZoneConfigurator {
 			protected void createDialog() {
 				addGreeting("Welcome to the Fado Bank! Do you need #help?");
 				addJob("I am the manager for the bank.");
-				addHelp("Just to the left, you can see a few chests. Open one and you can store your belongings in it.");
+				addHelp("Just to the left, you can see a few chests. Open one and you can store your belongings in it. We also have #bankstatement feature.");
+				addReply("bankstatement", "Bankstatement is a new feature. After you adding things to your bank chest, you can check your bankstatement in the travel log panel. There is also #update function.");
+				addReply("update", "You can click the 'update' bottom in the travel log panel to update your bankstatement. You are on free trial by now, so the service is totally free.");
 				addGoodbye("Have a nice day.");
 			}
 		};
