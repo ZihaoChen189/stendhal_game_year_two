@@ -731,6 +731,15 @@ public class Creature extends NPC {
 			if (enemy.isInvisibleToCreatures()) {
 				continue;
 			}
+			if (enemy.getAllEquipped("pipe").size() == 1) {
+				continue;
+			}
+//			if (!(enemy.getEquippedItemClass("lhand", "pipe").isEmpty())) {
+//				continue;
+//			}
+//			if (!(enemy.getEquippedItemClass("rhand", "pipe").isEmpty())) {
+//				continue;
+//			}
 
 			final double squaredDistance = this.squaredDistance(enemy);
 			if (squaredDistance <= (range * range)) {
@@ -782,6 +791,15 @@ public class Creature extends NPC {
 			}
 
 			if (playerOrFriend.isInvisibleToCreatures()) {
+				continue;
+			}
+//			if (!(playerOrFriend.getEquippedItemClass("lhand", "pipe").isEmpty())) {
+//				continue;
+//			}
+//			if (!(playerOrFriend.getEquippedItemClass("rhand", "pipe").isEmpty())) {
+//				continue;
+//			}
+			if (playerOrFriend.getAllEquipped("pipe").size() == 1) {
 				continue;
 			}
 
