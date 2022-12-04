@@ -33,7 +33,6 @@ import games.stendhal.server.entity.creature.RaidCreature;
 import games.stendhal.server.entity.creature.Sheep;
 import games.stendhal.server.entity.item.StackableItem;
 import games.stendhal.server.entity.mapstuff.block.Block;
-import games.stendhal.server.entity.mapstuff.handcart.Handcart;
 import games.stendhal.server.entity.mapstuff.portal.Gate;
 import games.stendhal.server.entity.player.Player;
 import marauroa.common.game.RPAction;
@@ -119,12 +118,6 @@ public class SummonAction extends AdministrationAction {
 
         if ("block".equals(action.get(CREATURE))) {
 		    final Block block = new Block(true);
-		    block.setPosition(action.getInt(X), action.getInt(Y));
-		    player.getZone().add(block);
-		}
-        
-        if ("handcart".equals(action.get(CREATURE))) {
-		    final Handcart block = new Handcart();
 		    block.setPosition(action.getInt(X), action.getInt(Y));
 		    player.getZone().add(block);
 		}
