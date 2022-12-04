@@ -15,13 +15,15 @@ import static games.stendhal.common.constants.Actions.PROGRESS_STATUS;
 
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.ArrayList;
+import java.util.Map;
 import games.stendhal.server.actions.ActionListener;
 import games.stendhal.server.actions.CommandCenter;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.rp.StendhalQuestSystem;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.events.ProgressStatusEvent;
+import games.stendhal.server.actions.equip.*;
 import marauroa.common.game.RPAction;
 
 /**
@@ -63,10 +65,11 @@ public class ProgressStatusQueryAction implements ActionListener {
 	 *
 	 * @param player Player to sent the event to
 	 */
-	private void sendProgressTypes(Player player) {
-		List<String> list = Arrays.asList("Open Quests", "Completed Quests", "Production");
+	public List<String> sendProgressTypes(Player player) {
+		List<String> list = Arrays.asList("Open Quests", "Completed Quests", "Production", "Bank Statement");
 		player.addEvent(new ProgressStatusEvent(list));
 		player.notifyWorldAboutChanges();
+		return list;
 	}
 
 	/**
@@ -88,6 +91,10 @@ public class ProgressStatusQueryAction implements ActionListener {
 		} else if (progressType.equals("Production")) {
 			player.addEvent(new ProgressStatusEvent(progressType,
 					SingletonRepository.getProducerRegister().getWorkingProducerNames(player)));
+		} else if (progressType.equals("Bank Statement")) {
+			Map<String, List<String>> mappers = BankChestItemLogger.getList();
+			List<String> bankNames = new ArrayList<>(mappers.keySet());
+			player.addEvent(new ProgressStatusEvent(progressType, bankNames));
 		}
 		player.notifyWorldAboutChanges();
 	}
@@ -110,6 +117,9 @@ public class ProgressStatusQueryAction implements ActionListener {
 			player.addEvent(new ProgressStatusEvent(progressType, item,
 					SingletonRepository.getProducerRegister().getProductionDescription(player, item),
 					SingletonRepository.getProducerRegister().getProductionDetails(player, item)));
+		} else if (progressType.equals("Bank Statement")) {
+			player.addEvent(
+					new ProgressStatusEvent(progressType, item, "Content in the Chest", BankChestItemLogger.getList().get(item)));
 		}
 		player.notifyWorldAboutChanges();
 	}

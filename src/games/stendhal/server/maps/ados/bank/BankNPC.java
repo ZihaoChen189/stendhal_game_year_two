@@ -54,7 +54,9 @@ public class BankNPC implements ZoneConfigurator {
 				addGreeting("Welcome to Ados Bank!");
 				addJob("I am the customer advisor of Ados Bank.");
 				addHelp("Our rooms contain 4 #chests of our bank and 4 chests of our affiliate in #Semos. They are available for your full use.");
-				addReply("chests", "You can find the chests in our two separated rooms. Two chests of our bank are accessible on the left side in these rooms and 2 of our affiliate in Semos at the right.");
+				addReply("chests", "You can find the chests in our two separated rooms. Two chests of our bank are accessible on the left side in these rooms and 2 of our affiliate in Semos at the right. We also have #bankstatement feature.");
+				addReply("bankstatement", "Bankstatement is a new feature. After you adding things to your bank chest, you can check your bankstatement in the travel log panel. There is also #update function.");
+				addReply("update", "You can click the 'update' bottom in the travel log panel to update your bankstatement. You are on free trial by now, so the service is totally free.");
 				addReply("Semos", "Our main affiliate is in Semos City. Maybe you met my chief advisor #Dagobert already. He is my personal mentor.");
 				addReply("Dagobert", "He can explain a lot about our banking system, but maybe I can explain #more to you as well if you want.");
 				addReply("more", "Visit one of our two rooms for reaching our magic chests. You can store your belongings in any of them, and nobody will be able to reach them. A number of spells have been cast on the chest areas to ensure #safety.");

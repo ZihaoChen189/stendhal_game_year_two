@@ -61,7 +61,9 @@ public class BankNPC implements ZoneConfigurator {
 			protected void createDialog() {
 				addGreeting("Greetings. If you need #help, please ask.");
 				addJob("I work here in the bank.");
-				addHelp("That room has two chests owned by this bank and two owned by Semos bank.");
+				addHelp("That room has two chests owned by this bank and two owned by Semos bank. We also have #bankstatement feature.");
+				addReply("bankstatement", "Bankstatement is a new feature. After you adding things to your bank chest, you can check your bankstatement in the travel log panel. There is also #update function.");
+				addReply("update", "You can click the 'update' bottom in the travel log panel to update your bankstatement. You are on free trial by now, so the service is totally free.");
 				addGoodbye("Goodbye, young human.");
 				//remaining behaviour defined in Take Gold for Grafindle quest
 			}
@@ -96,7 +98,9 @@ public class BankNPC implements ZoneConfigurator {
 			@Override
 			protected void createDialog() {
 				addGreeting("Welcome to Nalwor Bank. I'm here to #help.");
-				addHelp("Customers can deposit their items in the chests in that small room behind me. The two chests on the right are under Semos management.");
+				addHelp("Customers can deposit their items in the chests in that small room behind me. The two chests on the right are under Semos management. We also have #bankstatement feature.");
+				addReply("bankstatement", "Bankstatement is a new feature. After you adding things to your bank chest, you can check your bankstatement in the travel log panel. There is also #update function.");
+				addReply("update", "You can click the 'update' bottom in the travel log panel to update your bankstatement. You are on free trial by now, so the service is totally free.");
 				addOffer("I can #help you.");
 				addJob("I help customers of the bank, elves and even humans.");
 				addQuest("I don't need anything, thank you.");

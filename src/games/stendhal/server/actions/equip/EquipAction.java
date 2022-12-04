@@ -24,7 +24,7 @@ import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.entity.slot.Slots;
 import marauroa.common.game.RPAction;
 
-public class EquipAction extends EquipmentAction {
+public class EquipAction extends EquipmentAction{
 
 	/**
 	 * registers "equip" action processor.
@@ -126,6 +126,8 @@ public class EquipAction extends EquipmentAction {
 
 			new GameEvent(player.getName(), "equip", itemName, source.getSlot(), dest.getSlot(), Integer.toString(amount)).raise();
 
+			BankChestItemLogger.getLog(source, dest, itemName);
+			
 			player.updateItemAtkDef();
 		}
 	}

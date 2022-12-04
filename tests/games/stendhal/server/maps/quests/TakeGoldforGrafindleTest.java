@@ -79,7 +79,7 @@ public class TakeGoldforGrafindleTest {
 		en.step(player, "hi");
 		assertEquals("Greetings. If you need #help, please ask.", getReply(npc));
 		en.step(player, "help");
-		assertEquals("That room has two chests owned by this bank and two owned by Semos bank.", getReply(npc));
+		assertEquals("That room has two chests owned by this bank and two owned by Semos bank. We also have #bankstatement feature.", getReply(npc));
 		en.step(player, "task");
 		assertEquals("I need someone who can be trusted with #gold.", getReply(npc));
 		en.step(player, "gold");
