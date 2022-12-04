@@ -379,6 +379,25 @@
       <slot name="trade"/>
     </equipable>
   </item>
+  
+  <item name="orc disguise">
+    <type class="armor" subclass="orc_disguise" tileid="-1"/>
+    <description>You see the dirty husk of an Orc. It reeks of blood...</description>
+    <implementation class-name="games.stendhal.server.entity.item.Item"/>
+    <attributes>
+      <def value="5"/>
+      <min_level value="10"/>
+    </attributes>
+    <weight value="50.0"/>
+    <value value="5000"/>
+    <equipable>
+      <slot name="ground"/>
+      <slot name="content"/>
+      <slot name="bag"/>
+      <slot name="trade"/>
+      <slot name="armor"/>
+    </equipable>
+  </item>
 
   <item name="pauldroned iron cuirass">
     <type class="armor" subclass="enhanced_iron_cuirass" tileid="-1"/>

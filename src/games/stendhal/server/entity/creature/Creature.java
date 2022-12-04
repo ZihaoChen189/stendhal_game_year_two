@@ -727,7 +727,16 @@ public class Creature extends NPC {
 			if (enemy == this) {
 				continue;
 			}
+			
+			String creature_name = this.getName();
+			if(creature_name.contains(" ")) {
+				creature_name = creature_name.substring(0, creature_name.indexOf(" "));
+			}
 
+			if ((enemy.isEquippedItemInSlot("armor", creature_name + " disguise")) && (!enemy.isAttacking())) {
+				continue;
+			}
+			
 			if (enemy.isInvisibleToCreatures()) {
 				continue;
 			}
