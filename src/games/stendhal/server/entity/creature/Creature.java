@@ -1141,6 +1141,10 @@ public class Creature extends NPC {
 
 	@Override
 	public boolean attack() {
+		if (this.getAttackTarget().getAllEquipped("pipe").size() == 1){
+			return false;
+			
+		}
 		boolean res = super.attack();
 
 		// count hits for corpse protection
