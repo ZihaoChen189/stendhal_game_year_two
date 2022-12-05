@@ -2,6 +2,22 @@ Changelog
 ---------
 ---------
 
+1.41uom
+
+
+*word*
+- added a Pipe item into the game. 
+- Equipping the pipe prevents hostile creatures from attacking the player instead they swarm around the player and create a protective barrier
+- added a new armor named "orc disguise" making the player invisible to orc creatures
+- added a new session called "bank statement" to the travel log panel
+- bank statement can record the item in the chests of different banks
+- added a hand cart which extends chest and it is able to push
+
+*graphics*
+- added sprite: "orc_disguise.png", a new armor image
+- added new pipe image "pipe.png"
+
+
 1.40uom
 
 

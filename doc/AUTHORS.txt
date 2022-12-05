@@ -203,17 +203,25 @@ Notable contributors:
   · NPCs
 - Kang Fan
   · Fixed bug of "haunchy doesn't accept charcoal"
+  · Add feature of "hand Carts"
 - Abdul Zahid
   · Fixed bug of "cheating on Zekiel's Practical Test"
+  · Add feature of "pipe that charms hostile creatures"
 - Zihao Chen
-  · Fixed bug of "Karl ignore "horse hair"
+  · Fixed bug of "karl ignore "horse hair"
+  · Add feature of "disguises"
 - Yufan Pan
   · Fixed bug of "sheep pet prevents travel between zones"
+  · Add feature of "bank statements"
 - Kavan Heppenstall
   · Fixed bug of "players can’t choose what masks they get from Fidorea"
+  · Add feature of "disguises"
 - Zhuoran Wang
   · Fixed bug of "lieutenant Drilenun suggests that a better weapon exists.... BUT HE IS WRONG"
+  · Add feature of "pipe that charms hostile creatures"
 - Wenzhi Wang
   · Fixed bug of "fish Soup for Hughie"
+  · Add feature of "bank statements"
 - Bekhruz Suleymanov
   · Fixed bug of "Coralia should have option to accept everything"
+  · Add feature of "hand Carts"
